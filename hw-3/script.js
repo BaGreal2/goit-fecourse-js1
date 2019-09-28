@@ -3,7 +3,7 @@ const logins = ["Mango", "robotGoogles", "Poly", "Aj4x1sBozz", "qwerty123"];
 const input = prompt('your login, please...')
 
 const isLoginValid = function(login) {
-    if (input.length > 4 && input.length < 16) {
+    if (input.length >= 4 && input.length <= 16) {
         let validation1 = true;
         return validation1;
     } else {
