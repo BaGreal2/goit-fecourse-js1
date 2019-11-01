@@ -4,29 +4,25 @@ const input = prompt('your login, please...')
 
 const isLoginValid = function(login) {
     if (input.length >= 4 && input.length <= 16) {
-        let validation1 = true;
-        return validation1;
+        return true;
     } else {
-        let validation1 = false;
-        return validation1;
+        return false;
     }
 };
 
 
 const isLoginUnique = function(allLogins, login) {
     if (logins.indexOf( input ) === -1) {
-        let validation2 = true;
-        return validation2;
+        return true;
     } else {
-        let validation2 = false;
-        return validation2;
+        return false;
     }
 };
 
 
 const addLogin = function(allLogins, login) {
-    if (isLoginValid(input) === true) {
-        if(isLoginUnique(logins, input) === true) {
+    if (isLoginValid(input)) {
+        if(isLoginUnique(logins, input)) {
              logins.push(input);
              let succes = 'Логин успешно добавлен!';
              return succes;
