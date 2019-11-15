@@ -1,12 +1,4 @@
-let totalmoney = 0;
-
-let userInput = 0;
-
-
-const productsUser = [];
-
-
-let money = [];
+const userInput = prompt('Сколько у вас есть денег?');
 
 const products = {
     bread: 10,
@@ -16,37 +8,47 @@ const products = {
     cheese: 40,
 };
 
-do {
+let allPrice = 0;
 
-    userInput = prompt( 'Вводите деньги, потом нажмите Cancel' );
-    money.push( userInput )
-
- } while( userInput !== null );
-
-do {
-
-    userInput2 = prompt( 'Вводите продукты(bread, milk, apples, chicken, cheese), потом нажмите Cancel' );
-    productsUser.push( userInput2 )
-
- } while( userInput !== null );
-
-function Cashier(name, productDatabase) {
+function Cashier(name, productDatabase, allPrice, userInput) {
 
     this.name = name;
 
-    this.productDatabase = Object.keys(productDatabase);
+    this.productDatabases = Object.values(productDatabase);
 
-    this.customerMoney = money;
+    this.customerMoney = Number(userInput);
 
-    this.setCustomerMoney = function(){
-        for(var i=0;i<money.length;i++){
-            totalmoney = totalmoney + money[i];
-            
+    this.countTotalPrice = function(){
+        for(let item of this.productDatabases) {
+
+        allPrice += Number(item);
+
         }
-    }
+        return Number(allPrice);
+    };
+
+    this.countChange =  Number(userInput) - Number(this.countTotalPrice());
+
+    //     return change;
+
+    // };
+
+    this.onSuccess = function() {
+            console.log(`Спасибо за покупку, ваша сдача ${this.countChange}!`)
+    };
+
+    this.onError = function(){
+            console.log(`Очень жаль, вам не хватает денег на покупки`)
+        }
+
+    this.reset = function() {this.countTotalPrice() = 0};
 
 }
-  
-const mango = new Cashier('Mango', products)
 
-console.log(mango)
+const mango = new Cashier('Mango', products, allPrice, userInput)
+
+if (mango.countChange >= 0) {
+    mango.onSuccess();
+} else {
+    mango.onError();
+}
